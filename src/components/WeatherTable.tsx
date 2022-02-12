@@ -37,14 +37,11 @@ const WeatherTable = () => {
 
     useEffect(() => {
         const localData = localStorage.getItem('currentSearchData');
-        console.log('useEffect >>', currentSearchData)
-        console.log('useEffect2 >>', localStorage.currentSearchData)
         getWeatherUTC(currentSearchData)
     }, [])
 
     useEffect(() => {
         getWeatherUTC(currentSearchData)
-        console.log('useEffect3 update >>', currentSearchData)
         localStorage.setItem('currentSearchData', JSON.stringify(currentSearchData))
     }, [currentSearchData])
 
@@ -55,7 +52,7 @@ const WeatherTable = () => {
             setLoadingWeather(false)
             setWeatherData(response.data);
         } catch (error) {
-            console.log('Api error >>')
+            console.log('Api error >>', error)
             setApiError(true)
         }
     }
@@ -73,15 +70,9 @@ const WeatherTable = () => {
         const dateMonth = +dateInUSA.slice(3, 5).join('')
         const dateDays = +dateInUSA.slice(0, 2).join('')
         const dateYear = +dateInUSA.slice(-4).join('')
-        console.log('dateDays', dateDays, dateMonth, dateYear)
-        console.log('NEW DATE >>', new Date(2022, 2, 10))
 
         if (dateInputValueRef.current.value.length === 10 && new Date(dateYear, dateDays, dateMonth).toLocaleDateString('ru') !== 'Invalid Date') {
-            console.log('changeWeatherDataTime1 >>', dateInputValueRef.current.value)
             const newDateTime = `${new Date(dateYear, dateMonth - 1, dateDays).getTime() / 1000}`
-            console.log('changeWeatherDataTime2 >>', newDateTime)
-            console.log('dateNow >>', Date.now())
-
             setCurrentSearchData(prevState => {
                 return { ...prevState, dt: Number(newDateTime) }
             })
