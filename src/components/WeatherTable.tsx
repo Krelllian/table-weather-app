@@ -66,10 +66,10 @@ const WeatherTable = () => {
     const changeWeatherDataTime: React.ChangeEventHandler<HTMLInputElement> = (e) => {
 
         //Корректировка инпута под формат Date
-        const dateInUSA = [...dateInputValueRef.current.value]
-        const dateMonth = +dateInUSA.slice(3, 5).join('')
-        const dateDays = +dateInUSA.slice(0, 2).join('')
-        const dateYear = +dateInUSA.slice(-4).join('')
+        const date = [...dateInputValueRef.current.value]
+        const dateMonth = +date.slice(3, 5).join('')
+        const dateDays = +date.slice(0, 2).join('')
+        const dateYear = +date.slice(-4).join('')
 
         if (dateInputValueRef.current.value.length === 10 && new Date(dateYear, dateDays, dateMonth).toLocaleDateString('ru') !== 'Invalid Date') {
             const newDateTime = `${new Date(dateYear, dateMonth - 1, dateDays).getTime() / 1000}`
