@@ -24,9 +24,9 @@ export interface IWeatherData {
 
 const WeatherTable = () => {
 
-    const apiKey = '094a267ffe81ea50e9c3ddf4464b3d99';
+    // const apiKey = '094a267ffe81ea50e9c3ddf4464b3d99';
 
-    // const apiKey = '052e88406fb9f6388aa2d5243f9ed81c'; //dev
+    const apiKey = '052e88406fb9f6388aa2d5243f9ed81c'; //dev
 
     const localData: any = localStorage.getItem('currentSearchData');
     const dateInputValueRef: any = useRef()
@@ -113,7 +113,7 @@ const WeatherTable = () => {
                         <tr>
                             <th>Дата</th>
                             <th>Температура воздуха, ℃</th>
-                            <th>Давление, мм. вод.ст.</th>
+                            <th>Давление, мм. рт.ст.</th>
                             <th>Скорость ветра, м/с</th>
                             <th className='weather__table__cloudiness'>Облачность</th>
                         </tr>
@@ -125,7 +125,7 @@ const WeatherTable = () => {
                             return <tr key={i}>
                                 <td>{new Date(hourly.dt * 1000).toLocaleString('ru')}</td>
                                 <td>{Math.round(hourly.temp * 10) / 10}</td>
-                                <td>{hourly.pressure}</td>
+                                <td>{Math.round(hourly.pressure / 100 * 73)}</td>
                                 <td>{Math.round(hourly.wind_speed)}</td>
                                 <td>{hourly.weather[0].description}</td>
                             </tr>
