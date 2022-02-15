@@ -33,6 +33,7 @@ const WeatherTable = () => {
 
     const [loadingWeather, setLoadingWeather] = useState(false)
     const [apiError, setApiError] = useState(false)
+    const [dateError, setDateError] = useState(false)
 
     const [weatherData, setWeatherData] = useState<IWeatherData>();
 
@@ -74,7 +75,18 @@ const WeatherTable = () => {
         const dateDays = +date.slice(0, 2).join('')
         const dateYear = +date.slice(-4).join('')
 
+        const searchDate = new Date(dateYear, dateMonth - 1, dateDays).getTime()
+        const dateNow = Date.now()
+        const fourDaysInMilliseconds = 415600000
+
+
+
         if (dateInputValueRef.current.value.length === 10 && new Date(dateYear, dateDays, dateMonth).toLocaleDateString('ru') !== 'Invalid Date') {
+            if (dateNow - searchDate > fourDaysInMilliseconds || dateNow - searchDate < 0) {
+                setDateError(true)
+                return
+            }
+            setDateError(false)
             const newDateTime = `${new Date(dateYear, dateMonth - 1, dateDays).getTime() / 1000}`
             setCurrentSearchData(prevState => {
                 return { ...prevState, dt: Number(newDateTime) }
@@ -85,8 +97,6 @@ const WeatherTable = () => {
     const toggleClassShow = () => {
         document.querySelector('.weather__sort__options')?.classList.toggle('show')
     }
-
-    console.log(currentSearchData)
 
     return (
         <section className='weather container'>
@@ -105,6 +115,7 @@ const WeatherTable = () => {
 
                     <input onChange={changeWeatherDataTime} className="weather__sort weather__sort--date" type="text" ref={dateInputValueRef} placeholder='Введите дату: ДД.ММ.ГГГГ' maxLength={10}></input>
                 </div>
+                {dateError && <p className='weather__data-error'>Введите дату в диапазоне 4 дней от текущей даты</p>}
 
                 <div className='weather__city-title'><p>{currentSearchData.city} </p></div>
 

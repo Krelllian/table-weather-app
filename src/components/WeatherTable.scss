@@ -65,11 +65,17 @@
     background-color: white;
 }
 
+.weather__data-error {
+    color: #cc0000;
+    margin-top: -12px;
+    margin-bottom: 6px;
+}
+
 .weather__city-title {
     text-align: center;
     margin-bottom: 5px;
     p {
-        font-size: 40px;
+        font-size: 30px;
         font-weight: 600;
     }
 }
