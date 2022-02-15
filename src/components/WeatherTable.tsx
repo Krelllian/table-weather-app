@@ -7,6 +7,7 @@ export interface ICurrentSearchData {
     lat: number
     lon: number
     dt: number
+    city: string
 }
 
 export interface IWeatherHour {
@@ -22,10 +23,12 @@ export interface IWeatherData {
 }
 
 const WeatherTable = () => {
+
     const apiKey = '094a267ffe81ea50e9c3ddf4464b3d99';
 
+    // const apiKey = '052e88406fb9f6388aa2d5243f9ed81c'; //dev
+
     const localData: any = localStorage.getItem('currentSearchData');
-    const dateRightNow = Math.floor(Date.now() / 1000);
     const dateInputValueRef: any = useRef()
 
     const [loadingWeather, setLoadingWeather] = useState(false)
@@ -33,10 +36,10 @@ const WeatherTable = () => {
 
     const [weatherData, setWeatherData] = useState<IWeatherData>();
 
-    const [currentSearchData, setCurrentSearchData] = useState<ICurrentSearchData>(localStorage.currentSearchData ? JSON.parse(localData) : { lat: 55, lon: 37, dt: Math.floor(Date.now() / 1000 - 45000) })
+    const [currentSearchData, setCurrentSearchData] = useState<ICurrentSearchData>(localStorage.currentSearchData ? JSON.parse(localData)
+        : { lat: 55, lon: 37, dt: Math.floor(Date.now() / 1000 - 45000), city: 'Москва' })
 
     useEffect(() => {
-        const localData = localStorage.getItem('currentSearchData');
         getWeatherUTC(currentSearchData)
     }, [])
 
@@ -57,9 +60,9 @@ const WeatherTable = () => {
         }
     }
 
-    const updateCurrentSearchData = (lat: number, lon: number) => {
+    const updateCurrentSearchData = (lat: number, lon: number, city: string) => {
         setCurrentSearchData(prevState => {
-            return { ...prevState, lat, lon }
+            return { ...prevState, lat, lon, city }
         })
     }
 
@@ -83,6 +86,8 @@ const WeatherTable = () => {
         document.querySelector('.weather__sort__options')?.classList.toggle('show')
     }
 
+    console.log(currentSearchData)
+
     return (
         <section className='weather container'>
             <div className='weather__content'>
@@ -91,15 +96,17 @@ const WeatherTable = () => {
                     <ul className='weather-menu' onClick={toggleClassShow}>
                         <li className='weather__sort weather__sort--city'>Выберите город
                             <ul className='weather__sort__options'>
-                                <li onClick={() => updateCurrentSearchData(55, 37)}><p>Москва</p></li>
-                                <li onClick={() => updateCurrentSearchData(60, 76)}><p>Нижневартовск</p></li>
-                                <li onClick={() => updateCurrentSearchData(43, 131)}><p>Владивосток</p></li>
+                                <li onClick={() => updateCurrentSearchData(55, 37, 'Москва')}><p>Москва</p></li>
+                                <li onClick={() => updateCurrentSearchData(60, 76, 'Нижневартовск')}><p>Нижневартовск</p></li>
+                                <li onClick={() => updateCurrentSearchData(43, 131, 'Владивосток')}><p>Владивосток</p></li>
                             </ul>
                         </li>
                     </ul>
 
                     <input onChange={changeWeatherDataTime} className="weather__sort weather__sort--date" type="text" ref={dateInputValueRef} placeholder='Введите дату: ДД.ММ.ГГГГ' maxLength={10}></input>
                 </div>
+
+                <div className='weather__city-title'><p>{currentSearchData.city} </p></div>
 
                 <table className='weather__table' >
                     <thead>

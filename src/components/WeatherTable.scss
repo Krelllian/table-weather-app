@@ -65,6 +65,15 @@
     background-color: white;
 }
 
+.weather__city-title {
+    text-align: center;
+    margin-bottom: 5px;
+    p {
+        font-size: 40px;
+        font-weight: 600;
+    }
+}
+
 .weather__table {
     position: relative;
     border-collapse: separate;
