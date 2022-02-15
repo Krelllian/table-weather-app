@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/table-weather-app/build/static/css/main.9e5db164.css",
-    "main.js": "/table-weather-app/build/static/js/main.630f8184.js",
+    "main.js": "/table-weather-app/build/static/js/main.f283ce71.js",
     "static/js/787.1e172951.chunk.js": "/table-weather-app/build/static/js/787.1e172951.chunk.js",
     "index.html": "/table-weather-app/build/index.html",
     "main.9e5db164.css.map": "/table-weather-app/build/static/css/main.9e5db164.css.map",
-    "main.630f8184.js.map": "/table-weather-app/build/static/js/main.630f8184.js.map",
+    "main.f283ce71.js.map": "/table-weather-app/build/static/js/main.f283ce71.js.map",
     "787.1e172951.chunk.js.map": "/table-weather-app/build/static/js/787.1e172951.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9e5db164.css",
-    "static/js/main.630f8184.js"
+    "static/js/main.f283ce71.js"
   ]
 }
