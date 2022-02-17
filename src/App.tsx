@@ -8,9 +8,11 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-      <main className='App-main container'>
-        <WeatherTable />
-      </main>
+      <body>
+        <main className='App-main container'>
+          <WeatherTable />
+        </main>
+      </body>
     </div>
   );
 }
