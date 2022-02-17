@@ -6,9 +6,17 @@
 .weather__content {
     display: block;
     background-color: rgb(230, 230, 230);
-    width: 600px;
+    max-width: 600px;
     margin: auto;
     padding: 20px;
+    @media (max-width: 550px) {
+        font-size: 12px;
+        padding: 3px;
+        padding-top: 10px;
+    }
+    @media (max-width: 400px) {
+        font-size: 8px;
+    }
 }
 
 .weather__sorts {
@@ -31,7 +39,7 @@
 }
 
 .weather__sort--date {
-    width: 250px;
+    max-width: 250px;
 }
 
 .weather__sort__options {
@@ -77,6 +85,9 @@
     p {
         font-size: 30px;
         font-weight: 600;
+        @media (max-width: 400px) {
+            font-size: 24px;
+        }
     }
 }
 
@@ -89,6 +100,7 @@
     display: block;
     height: 600px;
     overflow-y: auto;
+
     thead {
         position: sticky;
         top: 0px;
@@ -117,8 +129,6 @@
 
     }
 }
-
-
 
 .weather__table__cloudiness {
     width: 150px;
